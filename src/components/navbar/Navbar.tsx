@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import moment from "moment";
 import clsx from "clsx";
 
@@ -22,17 +22,17 @@ export default function Navbar() {
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState<string>("all");
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
   const handleDescChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setDesc(e.target.value);
   };
 
-  const handleDeadLineChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDeadLineChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDeadLine(e.target.value);
   };
 
@@ -58,71 +58,73 @@ export default function Navbar() {
   };
 
   return (
-    <div className={styles.navbar}>
+    <>
       <ToastContainer />
-      <CustomModal isOpen={isModalOpen} onClose={() => setIsOpenModal(false)}>
-        <h3>Add Task to TodoList</h3>
-        <div className={styles.inputs}>
-          <label>Title :</label>
-          <input type="text" onChange={handleTitleChange} />
-          <label>description :</label>{" "}
-          <textarea
-            onChange={handleDescChange}
-            value={desc || ""}
-            rows={4}
-            className={styles.textarea}
-          />
-          <label>Deadline :</label>
-          <input type="text" onChange={handleDeadLineChange} />
-        </div>
+      <div className={styles.navbar}>
+        <CustomModal isOpen={isModalOpen} onClose={() => setIsOpenModal(false)}>
+          <h3>Add Task to TodoList</h3>
+          <div className={styles.inputs}>
+            <label>Title :</label>
+            <input type="text" onChange={handleTitleChange} />
+            <label>description :</label>{" "}
+            <textarea
+              onChange={handleDescChange}
+              value={desc || ""}
+              rows={4}
+              className={styles.textarea}
+            />
+            <label>Deadline :</label>
+            <input type="text" onChange={handleDeadLineChange} />
+          </div>
 
-        <div className={styles.addBtn}>
-          <button className={styles.button} onClick={addTaskTodo}>
-            Add Task
-          </button>
+          <div className={styles.addBtn}>
+            <button className={styles.button} onClick={addTaskTodo}>
+              Add Task
+            </button>
+          </div>
+        </CustomModal>
+        <div className={styles.date}>
+          <h4>{now.format("YYYY/MM/DD")}</h4>
+          <div className={styles.category}>
+            <li
+              onClick={() => {
+                getTaskById("lists");
+                setActiveTab("all");
+              }}
+              className={clsx({ [styles.active]: activeTab === "all" })}
+            >
+              All
+            </li>
+            <li
+              onClick={() => {
+                showCompletedTask();
+                setActiveTab("completed");
+              }}
+              className={clsx({ [styles.active]: activeTab === "completed" })}
+            >
+              Completed
+            </li>
+          </div>
         </div>
-      </CustomModal>
-      <div className={styles.date}>
-        <h4>{now.format("YYYY/MM/DD")}</h4>
-        <div className={styles.category}>
-          <li
-            onClick={() => {
-              getTaskById("lists");
-              setActiveTab("all");
-            }}
-            className={clsx({ [styles.active]: activeTab === "all" })}
-          >
-            All
-          </li>
-          <li
-            onClick={() => {
-              showCompletedTask();
-              setActiveTab("completed");
-            }}
-            className={clsx({ [styles.active]: activeTab === "completed" })}
-          >
-            Completed
-          </li>
+        <div className={styles.search}>
+          <div className={styles.input}>
+            <MingcuteSearch />
+            <input
+              type="text"
+              placeholder="Search List"
+              value={search}
+              onChange={searchHandler}
+            />
+          </div>
+
+          <div className={styles.button}>
+            <button onClick={() => setIsOpenModal(true)}>
+              <MingcuteAdd />
+              Add New List
+            </button>
+          </div>
         </div>
       </div>
-      <div className={styles.search}>
-        <div className={styles.input}>
-          <MingcuteSearch />
-          <input
-            type="text"
-            placeholder="Search List"
-            value={search}
-            onChange={searchHandler}
-          />
-        </div>
-
-        <div className={styles.button}>
-          <button onClick={() => setIsOpenModal(true)}>
-            <MingcuteAdd />
-            Add New List
-          </button>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

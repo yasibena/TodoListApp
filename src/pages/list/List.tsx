@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { Task } from "../../types/task";
 import styles from "./list.module.css";
 import { getLightPastelColor } from "../../helpers/helper";
@@ -23,17 +23,17 @@ export default function List({ task }: ListProps) {
     setIsChecked(task.completed);
   }, [task.completed]);
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
   const handleDescChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setDesc(e.target.value);
   };
 
-  const handleDeadLineChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDeadLineChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDeadLine(e.target.value);
   };
 

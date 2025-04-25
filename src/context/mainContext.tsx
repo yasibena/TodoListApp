@@ -1,5 +1,4 @@
 import { createContext, useReducer, ReactNode, ReactElement } from "react";
-
 import { Task } from "../types/task";
 
 interface TaskState {
@@ -53,7 +52,7 @@ const enum REDUCER_ACTION_TYPE {
 
 interface TaskAction {
   type: REDUCER_ACTION_TYPE;
-  payload?: any;
+  payload?: Task | string | Task[] | undefined; 
 }
 
 const taskReducer = (state: TaskState, action: TaskAction): TaskState => {
@@ -61,13 +60,13 @@ const taskReducer = (state: TaskState, action: TaskAction): TaskState => {
     case REDUCER_ACTION_TYPE.ADD_TASK:
       return {
         ...state,
-        list: [...state.list, action.payload],
+        list: [...state.list, action.payload as Task],
       };
 
     case REDUCER_ACTION_TYPE.REMOVE_TASK:
       return {
         ...state,
-        list: [...state.list.filter((task) => task.id !== action.payload)],
+        list: [...state.list.filter((task) => task.id !== (action.payload as string))],
       };
 
     case REDUCER_ACTION_TYPE.COMPELETE_TASK:
@@ -75,10 +74,10 @@ const taskReducer = (state: TaskState, action: TaskAction): TaskState => {
         ...state,
         list: [
           ...state.list.map((task) =>
-            task.id === action.payload.id
+            task.id === (action.payload as Task).id
               ? {
                   ...task,
-                  completed: action.payload.completed,
+                  completed: (action.payload as Task).completed,
                 }
               : task
           ),
@@ -88,19 +87,19 @@ const taskReducer = (state: TaskState, action: TaskAction): TaskState => {
     case REDUCER_ACTION_TYPE.GET_TASK_BY_ID:
       return {
         ...state,
-        list: action.payload || [],
+        list: action.payload as Task[] || [],
       };
     case REDUCER_ACTION_TYPE.EDIT_TASK:
       return {
         ...state,
         list: [
           ...state.list.map((task) =>
-            task.id === action.payload.id
+            task.id === (action.payload as Task).id
               ? {
                   ...task,
-                  title: action.payload.title,
-                  desc: action.payload.desc,
-                  deadline: action.payload.deadline,
+                  title: (action.payload as Task).title,
+                  desc: (action.payload as Task).desc,
+                  deadline: (action.payload as Task).deadline,
                 }
               : task
           ),
@@ -111,7 +110,7 @@ const taskReducer = (state: TaskState, action: TaskAction): TaskState => {
         ...state,
         list: [
           ...state.list.filter((task) =>
-            task.title.toLowerCase().includes(action.payload)
+            task.title.toLowerCase().includes(action.payload as string)
           ),
         ],
       };
@@ -125,7 +124,7 @@ const taskReducer = (state: TaskState, action: TaskAction): TaskState => {
   }
 };
 
-const saveToLocalStorage = (key: string, value: any) => {
+const saveToLocalStorage = (key: string, value: Task[]) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
@@ -172,12 +171,6 @@ const useMainContext = () => {
 
     saveToLocalStorage("lists", updateTask);
   };
-
-  //   const getTaskById = (id: string): Task | undefined => {
-  //     dispatch({ type: REDUCER_ACTION_TYPE.GET_TASK_BY_ID, payload: id });
-  //     const task = state.list?.find((task: Task) => task.id !== id);
-  //     return task;
-  //   };
 
   const completedTask = (task: Task): void => {
     dispatch({
@@ -229,6 +222,7 @@ const useMainContext = () => {
       });
     }
   };
+  
   const showCompletedTask = (): void => {
     dispatch({ type: REDUCER_ACTION_TYPE.SHOW_COMPELTED_TASK });
     const updateTask = state.list.filter((task) => task.completed !== false);
@@ -254,11 +248,11 @@ const intialContextState: MainContextType = {
   state: initialTaskState,
   addTask: async () => {},
   removeTask: async () => {},
-  searchInTask: async (target: string) => {},
-  completedTask: async (task: Task) => {},
-  editTask: async (task: Task) => undefined,
-  getTaskById: (id: string) => undefined,
-  showCompletedTask: async() => undefined,
+  searchInTask: async () => {}, 
+  completedTask: async () => {}, 
+  editTask: async () => undefined, 
+  getTaskById: () => undefined, 
+  showCompletedTask: async () => undefined,
 };
 
 export const MainContext = createContext<MainContextType>(intialContextState);

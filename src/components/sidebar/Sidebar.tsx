@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { MainContext } from "../../context/mainContext";
 
 import styles from "./sidebar.module.css";

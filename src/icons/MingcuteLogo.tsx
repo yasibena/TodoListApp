@@ -1,5 +1,5 @@
 
-import React, { SVGProps } from "react";
+import { SVGProps } from "react";
 
 export function MingcuteLogo(props: SVGProps<SVGSVGElement>) {
   return (

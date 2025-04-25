@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { MainContext } from "../../context/mainContext";
 import List from "../../pages/list/List";
 import { Task } from "../../types/task";

@@ -1,7 +1,17 @@
-import React from 'react'
+import React from "react";
+import styles from "./Error.module.css";
 
-export default function Error() {
+const Error: React.FC = () => {
   return (
-    <div>Error</div>
-  )
-}
+    <div className={styles.container}>
+      <div className={styles.errorBox}>
+        <h2 className={styles.header}>Oops! Something went wrong.</h2>
+        <p className={styles.message}>
+          Please try again later or contact support.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Error;
