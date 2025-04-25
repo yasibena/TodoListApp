@@ -1,0 +1,70 @@
+.list {
+  font-size: var(--fz-300);
+  /* width: 100%; */
+  max-width: 300px;
+  display: grid;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    input,
+    textarea {
+      border: 1px solid gray;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    input:focus {
+      border: none;
+    }
+  }
+
+  .addBtn {
+    button {
+      background-color: var(--btn-color);
+      color: var(--white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: var(--transition);
+      &:hover {
+        background: var(--btn-hover-color);
+      }
+    }
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+      font-size: var(--fz-400);
+    }
+    .titleCheck {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      input {
+        width: 17px;
+        height: 17px;
+      }
+    }
+    .icon {
+      cursor: pointer;
+    }
+  }
+
+  .deadline {
+    font-weight: 500;
+  }
+}

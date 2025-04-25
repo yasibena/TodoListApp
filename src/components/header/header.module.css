@@ -1,0 +1,11 @@
+.header {
+  .title {
+    display: flex;
+    font-size: var(--fz-200);
+
+    .icon{
+       display: flex;
+       align-items: center;
+    }
+  }
+}

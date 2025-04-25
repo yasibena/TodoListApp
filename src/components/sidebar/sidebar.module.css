@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 6px;
+
+  .vl {
+    border-left: 2px solid gray;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+  }
+
+  .item {
+    display: flex;
+    padding: 20px;
+    .hl {
+      width: 30px;
+      position: absolute;
+      background-color: gray;
+      left: 0;
+    }
+    .title {
+      margin-left: 30px;
+      margin-top: -5px;
+      transition: var(--transition);
+    }
+
+    /* &:hover {
+      background: var(--primary-color);
+      cursor: pointer;
+      border-top-right-radius: 10px;
+    } */
+  }
+}
+
+

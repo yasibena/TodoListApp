@@ -1,0 +1,32 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background: #f9fbfc;
+  padding: 30px;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* colors */
+  --primary-color: #d9e7ff;
+  --btn-color: #144ff5;
+  --btn-hover-color: #3964da;
+  --border-color: rgba(128, 128, 128, 0.506);
+  --white: #ffff;
+
+  --transition: all ease 0.3s;
+
+  /* fonts */
+  --fz-100: clamp(0.5rem, 0.4286rem + 0.2381vw, 0.625rem);
+  --fz-200: clamp(0.625rem, 0.5357rem + 0.3571vw, 0.75rem);
+  --fz-300: clamp(0.75rem, 0.6429rem + 0.4762vw, 1rem);
+  --fz-400: clamp(1rem, 1rem + 0vw, 1rem);
+  --fz-500: clamp(1.25rem, 1.1429rem + 0.4762vw, 1.5rem);
+  --fz-600: clamp(1.5rem, 1.2857rem + 0.9524vw, 2rem);
+  --fz-700: clamp(1.75rem, 1.4286rem + 1.4286vw, 2.5rem);
+  --fz-800: clamp(2.5rem, 1.8571rem + 2.8571vw, 4rem);
+  --fz-900: clamp(3rem, 1.7143rem + 5.7143vw, 6rem);
+}

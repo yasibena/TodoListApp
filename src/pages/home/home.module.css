@@ -1,0 +1,19 @@
+.home {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 20px;
+  overflow-x: hidden;
+
+  .dashboard {
+    background-color: var(--white);
+    padding: 15px;
+    border-radius: 10px;
+    /* max-height: 100vh; */
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    display: block;
+  }
+}
